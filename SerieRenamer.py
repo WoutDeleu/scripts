@@ -92,6 +92,12 @@ def findSubtitle_index(subs, counter):
     sorted_movies = sorted(subs)
     return sorted_movies[counter - 1]
 
+def remove_default_folders_files(arr):
+    result =[]
+    for entry in arr:
+        if (entry != '.DS_Store'):
+            result.append(entry)
+    return result
 
 printIntro()
 
@@ -104,6 +110,7 @@ locatie = input()
 
 counter = 1
 arr = os.listdir(locatie)
+arr = remove_default_folders_files(arr)
 movies = []
 subs = []
 filter_movies_subs(arr, movies, subs)

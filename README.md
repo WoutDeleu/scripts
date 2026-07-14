@@ -14,4 +14,8 @@ Welcome to my collection of Python scripts designed to automate small tasks. The
 - 📽️ **Purpose**: Renames subtitle files to match the video file they belong to.
 - 📥 **Usage**: Run the script and follow the prompts to point to the folder containing video and subtitle files, and it will match and rename them.
 
+#### GitManager
+- 🌳 **Purpose**: Recursively scans a folder (including nested directories) for git repositories and either reports local changes or brings them up to date on their default branch.
+- 📥 **Usage**: Run `python3 git_manager.py status <root_path>` to log every repo with local changes (staged, uncommitted, untracked, or unpushed commits), or `python3 git_manager.py update <root_path>` to check out the default branch (auto-detects `main`/`master`) and fast-forward pull each repo. Repos with local changes that would block an update are safely skipped and recorded. Every run prints a summary and writes a timestamped log file to the current directory.
+
 Feel free to explore and use these scripts to make your daily tasks more efficient. If you have any questions, suggestions, or encounter issues, don't hesitate to reach out. Happy automating! 🤖🔧🚀

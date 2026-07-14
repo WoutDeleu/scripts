@@ -9,16 +9,7 @@ from pandas import DataFrame
 
 
 def input_handling():
-    # timetable_csv = sys.argv[1]
-    timetable_csv = """
-    id,start,stop,project,tags
-    cc2d596,2023-11-13 08:30:00,2023-11-13 12:15:00,PythonCourse,AXXES_BEACH
-    020b20f,2023-11-13 13:00:00,2023-11-13 15:00:00,PythonCourse,AXXES_BEACH
-    b65561b,2023-11-13 15:00:00,2023-11-13 16:45:00,GildedTros,AXXES_BEACH
-    ce6eecd,2023-11-13 16:45:00,2023-11-13 17:45:00,PortfolioWebsite,AXXES_BEACH
-    e7031be,2023-11-14 08:30:00,2023-11-14 12:30:00,Voorbereiding_Vandevelde,AXXES_BEACH
-    e7031be,2023-11-14 13:30:00,2023-11-14 17:30:00,Voorbereiding_Vandevelde,AXXES_BEACH
-    """
+    timetable_csv = sys.argv[1]
 
     df: DataFrame = pd.read_csv(StringIO(timetable_csv), parse_dates=['start', 'stop'])
     if len(sys.argv) > 2:

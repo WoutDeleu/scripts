@@ -26,6 +26,9 @@ found:
   matching club, `BC Pluimplukkers`, with directory ID
   `13F15128-64AB-409A-8F9D-750C12961AA3`. The tool must disclose this unique
   canonical-name resolution rather than silently treating names as identical.
+- The club directory's observed search form posts to `/find/club/DoSearch`;
+  use it to obtain a stable club ID when the requested name and tournament
+  affiliation label differ.
 
 The source has no generally documented public API. The observed HTTP pages and
 their own form/script-requested content endpoints are sufficient for the
@@ -60,8 +63,10 @@ responsibilities:
   dates, and source URLs. Resolve the requested club using exact normalized
   names first; permit a unique canonical/affiliation alias only when the
   source provides one unambiguous candidate, and record the selected source
-  name and ID in warnings/metadata. Fail clearly on ambiguity or missing
-  affiliation. Keep source IDs as identities.
+  name and ID in warnings/metadata. Query the observed club directory search
+  form for the canonical club ID when necessary; map affiliation labels to
+  directory names only when the relationship is unique. Fail clearly on
+  ambiguity or missing affiliation. Keep source IDs as identities.
 - **Progression:** Represent source matches and feeder relationships explicitly.
   Derive knockout progression from the observed bracket structure and published
   results, excluding byes from win counts and not creating bye match rows.
@@ -98,8 +103,12 @@ unique; text beginning with formula characters is stored as literal content.
 
 When draws are absent but entries are available, produce an entries-only
 workbook and explicitly state the publication status. A successful empty match
-list is not a failure; request or parser failures are errors and must not yield
-a success-shaped partial workbook.
+list is not a failure. If an optional page/request fails after the core
+tournament, roster, and entries are known, produce a clearly marked PARTIAL
+workbook containing the successful data, include the failed section and error
+as a warning, and exit nonzero. Never convert such failures into “not
+published.” If the tournament identity, club identity, core roster, or workbook
+cannot be validated, fail without replacing an existing output file.
 
 ## Validation
 
